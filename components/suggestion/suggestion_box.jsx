@@ -785,6 +785,7 @@ export default class SuggestionBox extends React.PureComponent {
                 {(this.props.openWhenEmpty || this.props.value.length >= this.props.requiredCharacters) && this.state.presentationType === 'text' &&
                     <div style={{width: this.state.width}}>
                         <SuggestionListComponent
+                            target={this.inputRef}
                             ariaLiveRef={this.suggestionReadOut}
                             open={this.state.focused || this.props.forceSuggestionsWhenBlur}
                             pretext={this.pretext}

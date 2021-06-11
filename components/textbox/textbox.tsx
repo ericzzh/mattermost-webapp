@@ -20,6 +20,7 @@ import SuggestionBox from 'components/suggestion/suggestion_box.jsx';
 import SuggestionList from 'components/suggestion/suggestion_list.jsx';
 
 import * as Utils from 'utils/utils.jsx';
+import QuickInput from 'components/quick_input';
 
 type Props = {
     id: string;
@@ -38,6 +39,7 @@ type Props = {
     onBlur?: (e: FocusEvent) => void;
     supportsCommands: boolean;
     handlePostError?: (message: JSX.Element | null) => void;
+    suggestionList?: React.Component<React.ComponentProps<SuggestionList>>;
     suggestionListStyle?: string;
     emojiEnabled?: boolean;
     isRHS?: boolean;
@@ -65,6 +67,7 @@ export default class Textbox extends React.PureComponent<Props> {
     private suggestionProviders: Provider[];
     private wrapper: React.RefObject<HTMLDivElement>;
     private message: React.RefObject<SuggestionBox>;
+    // private message: React.RefObject<QuickInput>;
     private preview: React.RefObject<HTMLDivElement>;
 
     static defaultProps = {
@@ -72,6 +75,7 @@ export default class Textbox extends React.PureComponent<Props> {
         isRHS: false,
         listenForMentionKeyClick: false,
         inputComponent: AutosizeTextarea,
+        suggestionList: SuggestionList,
     };
 
     constructor(props: Props) {
@@ -194,6 +198,7 @@ export default class Textbox extends React.PureComponent<Props> {
 
     getInputBox = () => {
         return this.message.current?.getTextbox();
+        // return this.message.current?.getInput();
     }
 
     focus = () => {
@@ -276,7 +281,7 @@ export default class Textbox extends React.PureComponent<Props> {
                     onHeightChange={this.handleHeightChange}
                     style={{visibility: this.props.preview ? 'hidden' : 'visible'}}
                     inputComponent={this.props.inputComponent}
-                    listComponent={SuggestionList}
+                    listComponent={this.props.suggestionList}
                     listStyle={this.props.suggestionListStyle}
                     providers={this.suggestionProviders}
                     channelId={this.props.channelId}
@@ -289,6 +294,36 @@ export default class Textbox extends React.PureComponent<Props> {
                     wrapperHeight={wrapperHeight}
                     openWhenEmpty={this.props.openWhenEmpty}
                 />
+                {/* <QuickInput
+                    id={this.props.id}
+                    ref={this.message}
+                    className={textboxClassName}
+                    spellCheck='true'
+                    placeholder={this.props.createMessage}
+                    onChange={this.handleChange}
+                    onKeyPress={this.props.onKeyPress}
+                    onSelect={this.handleSelect}
+                    onKeyDown={this.handleKeyDown}
+                    onMouseUp={this.handleMouseUp}
+                    onKeyUp={this.handleKeyUp}
+                    onComposition={this.props.onComposition}
+                    onBlur={this.handleBlur}
+                    onHeightChange={this.handleHeightChange}
+                    style={{visibility: this.props.preview ? 'hidden' : 'visible'}}
+                    inputComponent={this.props.inputComponent}
+                    listComponent={SuggestionList}
+                    listStyle={this.props.suggestionListStyle}
+                    providers={this.suggestionProviders}
+                    channelId={this.props.channelId}
+                    value={this.props.value}
+                    renderDividers={true}
+                    isRHS={this.props.isRHS}
+                    disabled={this.props.disabled}
+                    contextId={this.props.channelId}
+                    listenForMentionKeyClick={this.props.listenForMentionKeyClick}
+                    wrapperHeight={wrapperHeight}
+                    openWhenEmpty={this.props.openWhenEmpty}
+                /> */}
                 {preview}
             </div>
         );

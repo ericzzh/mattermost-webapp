@@ -11,6 +11,8 @@ import {Constants} from 'utils/constants.jsx';
 import FormattedMarkdownMessage from 'components/formatted_markdown_message';
 import LoadingSpinner from 'components/widgets/loading/loading_spinner';
 
+// When this file is migrated to TypeScript, type definitions for its props already exist in ./suggestion_list.d.ts.
+
 export default class SuggestionList extends React.PureComponent {
     static propTypes = {
         ariaLiveRef: PropTypes.object,
