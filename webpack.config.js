@@ -21,7 +21,7 @@ const targetIsTest = NPM_TARGET === 'test';
 const targetIsStats = NPM_TARGET === 'stats';
 const targetIsDevServer = NPM_TARGET === 'dev-server';
 
-const DEV = targetIsRun || targetIsStats || targetIsDevServer;
+const DEV = targetIsRun || targetIsStats || targetIsDevServer|| true; 
 
 const STANDARD_EXCLUDE = [
     path.join(__dirname, 'node_modules'),
